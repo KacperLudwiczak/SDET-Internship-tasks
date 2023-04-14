@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Longest Substring Without Repeating Characters</title>
+  </head>
+  <body>
+    <form>
+      <label for="input">Enter:</label>
+      <input type="text" id="input" name="input" /><br /><br />
+      <input type="button" value="Submit" onclick="find()" />
+    </form>
+    <br />
+    <p id="result"></p>
+
+    <script>
+      function length(string) {
+        let index = new Map();
+        let start = 0;
+        let max = 0;
+        for (let end = 0; end < string.length; end++) {
+          let change = string[end];
+          if (index.has(change) && index.get(change) >= start) {
+            start = index.get(change) + 1;
+          }
+          index.set(change, end);
+          max = Math.max(max, end - start + 1);
+        }
+        return max;
+      }
+
+      function find() {
+        let input = document.getElementById("input").value;
+        let result = document.getElementById("result");
+        result.innerHTML = "Output: " + length(input);
+      }
+    </script>
+  </body>
+</html>
